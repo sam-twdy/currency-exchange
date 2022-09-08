@@ -8,6 +8,7 @@
   background-color: rgba(171, 167, 167, 0.09);
   padding-left: 0;
   padding-right: 0;
+  height: 20%;
 }
 
 .config-title {
@@ -29,11 +30,56 @@ input {
 }
 
 .row-style{
-  margin-bottom: 1rem;
   margin-top: 2rem;
 }
 
 .linebreak {
   background: rgba(22, 22, 22, 0.436);
   height: .05rem;
+}
+
+.exchange-table {
+  background: gray;
+  margin-top: 3vh;
+  height: 100vh;
+}
+
+::placeholder {
+  color: white;
+}
+
+.option {
+  height: 2rem;
+  width: 175px;
+  border: 1px solid black;
+  border-top: none;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+.option:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.dropdown {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+
+.dropdown.visible {
+  display: block;
+}
+
+.dropdown-container {
+  width: 175px;
+  position: relative;
+}
+
+.display-container {
+  justify-content: center;
+  display: flex;
 }
