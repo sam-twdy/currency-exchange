@@ -1,21 +1,7 @@
-import { useEffect, useState } from 'react';
 import CurrencyRow from './currencyRow';
 import ValueRow from './valueRow';
 
-const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
-
 export default function CurrencyExchange() {
-
-  /*const [currencyOptions, setCurrencyOptions] = useState([])
-  console.log(currencyOptions);
-
-    useEffect(() => {
-      fetch(BASE_URL)
-        .then(res => res.json())
-        .then(data => {
-          setCurrencyOptions([data.base, ...Object.keys(data.rates)])
-        })
-    }, [])*/
 
     return (
         <div className='configure-wrapper'>

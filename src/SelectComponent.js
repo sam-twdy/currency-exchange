@@ -1,57 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import withClickOutside from "./withClickOutside";
 
-const SelectComponent = React.forwardRef ( ({
+const SelectComponent = React.forwardRef(
+  ({ 
     options,
     placeholder = "",
     onChange,
     selectedKey,
     open,
     setOpen
-}, ref) => {
+    }, ref ) => {
 
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(placeholder);
 
     useEffect(() => {
-        if (selectedKey) {
-          setInputValue(options.find((o) => o.key === selectedKey).value);
+      if (selectedKey) {
+        setInputValue(options.find((o) => o.key === selectedKey).value);
+      }
+    }, [selectedKey, options]);
+
+    useEffect(() => {
+      if (!open && options.findIndex((o) => o.value === inputValue) === -1) {
+        if (!inputValue) {
+          onChange("");
+        } else {
+          if (selectedKey) {
+            setInputValue(options.find((o) => o.key === selectedKey).value);
+          } else {
+            setInputValue("");
+          }
         }
-      }, [selectedKey, options]);
+      }
+    }, [open, options, selectedKey, inputValue, onChange]);
 
     const onInputChange = (e) => {
-        setInputValue(e.target.value);
-    }
-
-    const onItemSelected = (option) => {
-        onChange !== undefined && onChange(options.key);
-        onChange !== undefined && setInputValue(option.value);
-        setOpen(false);
-    }
-
-    const onInputClick = () => {
-        setOpen((prevValue) => !prevValue);
+      setInputValue(e.target.value);
     };
 
-    return <div className='dropdown-container' ref={ref}>
-        <div className='input-container' onClick={onInputClick}>
-            <input
-            type = 'text'
-            value = {inputValue}
+    const onInputClick = () => {
+      setOpen((prevValue) => !prevValue);
+    };
+
+    const onOptionSelected = (option) => {
+      onChange !== undefined && onChange(option.key);
+      onChange !== undefined && setInputValue(option.value);
+      setOpen(false);
+    };
+
+    const clearInput = () => {
+        setInputValue('');
+    }
+
+    return (
+      <div className="dropdown-container" ref={ref}>
+        <div className="input-container" onClick={onInputClick}>
+          <input
+            type="text"
+            value={inputValue}
             placeholder={placeholder}
             onChange={onInputChange}
-            />
+            onFocus={clearInput}
+          />
         </div>
-        <div className={`dropdown ${open ? 'visible' : ''}`}>
-            {options.map(opt=>{
-                return (
-                <div key={opt.key} onClick={() => onItemSelected(opt)} className="option">
-                    {opt.value}
-                </div>
-            );
-            })}
+        <div className={`dropdown ${open ? "visible" : ""}`}>
+          {options
+            .filter((item) => {
+              const searchTerm = inputValue.toLowerCase();
+              const v = item.value.toLowerCase();
+
+              if (!searchTerm) return true;
+
+              return v.startsWith(searchTerm);
+            })
+            .map((opt) => (
+              <div
+                key={opt.key}
+                onClick={() => onOptionSelected(opt)}
+                className="option"
+                value={opt.key}
+              >
+                {opt.value}
+              </div>
+            ))}
         </div>
-    </div>
-    }
+      </div>
+    );
+  }
 );
 
 export default withClickOutside(SelectComponent);
