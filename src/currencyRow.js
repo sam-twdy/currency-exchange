@@ -9,7 +9,7 @@ const options = [
 ];
 
 export default function CurrencyRow(props) {
-    const [selectedOption, setSelectedOption] = useState("");
+    const [selectedOption, setSelectedOption] = useState(1);
     const [open, setOpen] = useState(false);
 
     return (
@@ -17,12 +17,12 @@ export default function CurrencyRow(props) {
             <SelectComponent
                 options={options}
                 onChange={(item) => setSelectedOption(item)}
-                selectedKey={setSelectedOption}
+                selectedKey={selectedOption}
                 placeholder={"type to search"}
                 open={open}
                 setOpen={setOpen}
             />
-            <p>selectedOption: {setSelectedOption}</p>
+            <p>selectedOption: {selectedOption}</p>
         </div>
     )
 }

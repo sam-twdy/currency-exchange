@@ -11,6 +11,12 @@ const SelectComponent = ({
 
     const [inputValue, setInputValue] = useState('');
 
+    useEffect(() => {
+        if (selectedKey) {
+          setInputValue(options.find((o) => o.key === selectedKey).value);
+        }
+      }, [selectedKey, options]);
+
     const onInputChange = (e) => {
         setInputValue(e.target.value);
     }
