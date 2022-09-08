@@ -10,7 +10,6 @@ const options = [
 
 export default function CurrencyRow(props) {
     const [selectedOption, setSelectedOption] = useState(1);
-    const [open, setOpen] = useState(false);
 
     return (
         <div className='row-style'>
@@ -19,8 +18,6 @@ export default function CurrencyRow(props) {
                 onChange={(item) => setSelectedOption(item)}
                 selectedKey={selectedOption}
                 placeholder={"type to search"}
-                open={open}
-                setOpen={setOpen}
             />
             <p>selectedOption: {selectedOption}</p>
         </div>

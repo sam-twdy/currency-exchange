@@ -1,13 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import withClickOutside from "./withClickOutside";
 
-const SelectComponent = ({
+const SelectComponent = React.forwardRef ( ({
     options,
     placeholder = "",
     onChange,
     selectedKey,
     open,
     setOpen
-}) => {
+}, ref) => {
 
     const [inputValue, setInputValue] = useState('');
 
@@ -31,21 +32,7 @@ const SelectComponent = ({
         setOpen((prevValue) => !prevValue);
     };
 
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true)
-    }, [])
-
-    const refOne = useRef(null)
-
-    const handleClickOutside = (e) => {
-        if(!refOne.current.contains(e.target)) {
-            console.log('click')
-            //change so click only fires if dropdown is open
-            setOpen(false);
-        } 
-    }
-
-    return <div className='dropdown-container' ref={refOne}>
+    return <div className='dropdown-container' ref={ref}>
         <div className='input-container' onClick={onInputClick}>
             <input
             type = 'text'
@@ -64,6 +51,7 @@ const SelectComponent = ({
             })}
         </div>
     </div>
-};
+    }
+);
 
-export default SelectComponent;
+export default withClickOutside(SelectComponent);
