@@ -8,7 +8,14 @@
   background-color: rgba(171, 167, 167, 0.09);
   padding-left: 0;
   padding-right: 0;
+  margin-left: 10vh;
+  margin-right: 2vh;
   height: 20%;
+}
+
+.ad{
+  margin-top: 3vh;
+  justify-content: center;
 }
 
 .config-title {
