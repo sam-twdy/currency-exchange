@@ -32,7 +32,7 @@ export default function CurrencyRow() {
         setOpen={setOpen}
         selectedCurrency={fromCurrency}
         onChange={(item) => setFromCurrency(item)}
-        placeholder = {'Enter Search'}
+        placeholder = {'Enter Search...'}
         />
         <p>selected option: {fromCurrency}</p>
       </div>

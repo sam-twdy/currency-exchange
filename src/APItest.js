@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 
 export default function APItest(props) {
@@ -40,7 +40,10 @@ export default function APItest(props) {
 
   const onInputClick = () => {
     setOpen((prevValue) => !prevValue);
+    inputRef.current.blur();
   };
+
+  const inputRef = useRef();
 
   const onOptionSelected = (option) => {
     onChange !== undefined && onChange(option);
@@ -56,6 +59,7 @@ export default function APItest(props) {
     <div className="dropdown-container">
         <div className="input-container" onClick={onInputClick}>
           <input
+            ref={inputRef}
             type="text"
             value={inputValue}
             onChange={onInputChange}
