@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 
-
 export default function APItest(props) {
 
     const {
@@ -9,7 +8,8 @@ export default function APItest(props) {
     setOpen,
     open,
     selectedCurrency,
-    placeholder
+    placeholder,
+    storedCurrency
   } = props
 
   const [inputValue, setInputValue] = useState(selectedCurrency);
@@ -34,13 +34,22 @@ export default function APItest(props) {
     }
   }, [open, currencyOptions, selectedCurrency, inputValue, onChange]);
 
+  useEffect(() => {
+    if(open) {
+    window.addEventListener('mousedown',closeOpenMenus)
+  
+    return () => { window.removeEventListener('mousedown',closeOpenMenus) }
+    }
+  }, [open])
+
   const onInputChange = (e) => {
     setInputValue(e.target.value);
   }
 
   const onInputClick = () => {
     setOpen((prevValue) => !prevValue);
-    inputRef.current.blur();
+    if (open === true) inputRef.current.blur();
+    if (open === true) setInputValue(storedCurrency)
   };
 
   const inputRef = useRef();
@@ -54,9 +63,18 @@ export default function APItest(props) {
   const clearInput = () => {
     setInputValue('');
   };
+
+  const catMenu = useRef(null)
+
+  const closeOpenMenus = (e)=>{
+    if(catMenu.current && open && !catMenu.current.contains(e.target)){
+      setOpen(false);
+      setInputValue(storedCurrency);
+    }
+}
   
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" ref={catMenu}>
         <div className="input-container" onClick={onInputClick}>
           <input
             ref={inputRef}

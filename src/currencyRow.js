@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-//import SelectComponent from "./SelectComponent";
 import APItest from './APItest';
-//import {reactLocalStorage} from 'reactjs-localstorage';
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 
 const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
 
@@ -12,9 +12,6 @@ export default function CurrencyRow() {
     const [open, setOpen] = useState(false);
     const [fromCurrency, setFromCurrency] = useState('')
 
-//    reactLocalStorage.set('iniCurrency', fromCurrency)
-//    const storedCurrency = reactLocalStorage.get('iniCurrency');
-
     useEffect(() => {
         fetch(BASE_URL)
           .then(res => res.json())
@@ -23,6 +20,12 @@ export default function CurrencyRow() {
             setFromCurrency(data.base)
           })
       }, [])
+
+      useEffect(() => {
+        if (fromCurrency !== '') reactLocalStorage.set('iniCurrency', fromCurrency);
+      }, [fromCurrency])
+
+      const storedCurrency = reactLocalStorage.get('iniCurrency');
   
     return (
       <div className="row-style">
@@ -33,6 +36,7 @@ export default function CurrencyRow() {
         selectedCurrency={fromCurrency}
         onChange={(item) => setFromCurrency(item)}
         placeholder = {'Enter Search...'}
+        storedCurrency={storedCurrency}
         />
         <p>selected option: {fromCurrency}</p>
       </div>
