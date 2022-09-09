@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 export default function APItest(props) {
@@ -13,6 +13,26 @@ export default function APItest(props) {
   } = props
 
   const [inputValue, setInputValue] = useState(selectedCurrency);
+
+  useEffect(() => {
+    if (selectedCurrency) {
+      setInputValue(currencyOptions.find((o) => o === selectedCurrency));
+    }
+  }, [selectedCurrency, currencyOptions]);
+
+  useEffect(() => {
+    if (!open && currencyOptions.findIndex((o) => o === inputValue) === -1) {
+      if (!inputValue) {
+        onChange("");
+      } else {
+        if (selectedCurrency) {
+          setInputValue(currencyOptions.find((o) => o === selectedCurrency));
+        } else {
+          setInputValue("");
+        }
+      }
+    }
+  }, [open, currencyOptions, selectedCurrency, inputValue, onChange]);
 
   const onInputChange = (e) => {
     setInputValue(e.target.value);
@@ -31,6 +51,7 @@ export default function APItest(props) {
   const clearInput = () => {
     setInputValue('');
   };
+  
   return (
     <div className="dropdown-container">
         <div className="input-container" onClick={onInputClick}>
@@ -44,6 +65,14 @@ export default function APItest(props) {
         </div>
         <div className={`dropdown ${open ? "visible" : ""}`}>
             {currencyOptions
+            .filter((item) => {
+              const searchTerm = (inputValue || '').toUpperCase();
+              const v = item.toUpperCase();
+
+              if (!searchTerm) return true;
+
+              return v.startsWith(searchTerm);
+            })
             .map(option => (
             <div 
             key={option}

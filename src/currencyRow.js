@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 //import SelectComponent from "./SelectComponent";
 import APItest from './APItest';
+//import {reactLocalStorage} from 'reactjs-localstorage';
 
 const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
 
@@ -9,7 +10,10 @@ export default function CurrencyRow() {
 
     const [currencyOptions, setCurrencyOptions] = useState([])
     const [open, setOpen] = useState(false);
-    const [fromCurrency, setFromCurrency] = useState()
+    const [fromCurrency, setFromCurrency] = useState('')
+
+//    reactLocalStorage.set('iniCurrency', fromCurrency)
+//    const storedCurrency = reactLocalStorage.get('iniCurrency');
 
     useEffect(() => {
         fetch(BASE_URL)
