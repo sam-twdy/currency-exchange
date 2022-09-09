@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
-import SelectComponent from "./SelectComponent";
-
-const options = [
-    { key: 1, value: "Test 1" },
-    { key: 2, value: "Test 2" },
-    { key: 3, value: "Test 3" },
-    { key: 4, value: "Test 4" }
-];
+//import SelectComponent from "./SelectComponent";
+import APItest from './APItest';
 
 const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
 
@@ -14,28 +8,29 @@ const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
 export default function CurrencyRow() {
 
     const [currencyOptions, setCurrencyOptions] = useState([])
-    console.log(currencyOptions)
+    const [open, setOpen] = useState(false);
+    const [fromCurrency, setFromCurrency] = useState()
 
     useEffect(() => {
         fetch(BASE_URL)
           .then(res => res.json())
           .then(data => {
-            const firstCurrency = Object.keys(data.rates)[0]
             setCurrencyOptions([data.base, ...Object.keys(data.rates)])
+            setFromCurrency(data.base)
           })
       }, [])
-
-    const [selectedOption, setSelectedOption] = useState("");
   
     return (
       <div className="row-style">
-        <SelectComponent
-          options={options}
-          onChange={(item) => setSelectedOption(item)}
-          selectedKey={selectedOption}
-          placeholder={"type to search"}
+        <APItest 
+        currencyOptions={currencyOptions}
+        open={open}
+        setOpen={setOpen}
+        selectedCurrency={fromCurrency}
+        onChange={(item) => setFromCurrency(item)}
+        placeholder = {'Enter Search'}
         />
-        <p>selected option: {selectedOption}</p>
+        <p>selected option: {fromCurrency}</p>
       </div>
     );
   }
