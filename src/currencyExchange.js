@@ -9,14 +9,14 @@ import ValueRow from './valueRow';
 
 export default function CurrencyExchange() {
 
-  const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
-
     const [currencyOptions, setCurrencyOptions] = useState([])
     const [open, setOpen] = useState(false);
-    const [toCurrency, setToCurrency] = useState([])
+    const [toCurrency, setToCurrency] = useState(['USD'])
     const [fromCurrency, setFromCurrency] = useState('')
     const [amount, setAmount] = useState(5)
     const [exchangeRate, setExchangeRate] = useState([])
+
+  const BASE_URL = (`https://api.frankfurter.app/latest?from=${toCurrency}`)
 
     //let toAmount = exchangeRate.map(arr => arr * amount)
 
@@ -44,9 +44,6 @@ export default function CurrencyExchange() {
         currencyExchangeList[element] = exchangeRate[index];
       });
 
-      console.log(currencyExchangeList);
-
-
       useEffect(() => {
         if (fromCurrency !== '') reactLocalStorage.set('iniCurrency', fromCurrency);
       }, [fromCurrency])
@@ -54,8 +51,11 @@ export default function CurrencyExchange() {
       const storedCurrency = reactLocalStorage.get('iniCurrency');
 
       function handleFromAmountChange(e) {
-        if (e.target.value !== undefined && e.target.value > 0) {
-        setAmount(e.target.value)}
+        if (e.target.value === undefined || e.target.value < 0.01) {
+        setAmount(1)}
+        else {
+        setAmount(e.target.value)
+        }
       }
 
     return (

@@ -69,7 +69,7 @@ export default function APItest(props) {
       setOpen(false);
       setInputValue(storedCurrency);
     }
-}
+  };
   
   return (
     <div className="dropdown-container">
@@ -84,7 +84,7 @@ export default function APItest(props) {
             onClick={onInputClick}
           />
         </div>
-        <div className={`dropdown ${open ? "visible" : ""}`}>
+        <div className={`dropdown ${open ? "visible" : ""}`} ref={inputRef}>
             {currencyOptions
             .filter((item) => {
               const searchTerm = (inputValue || '').toUpperCase();
