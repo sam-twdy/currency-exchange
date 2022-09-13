@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import APItest from './APItest';
 import {reactLocalStorage} from 'reactjs-localstorage';
+import ValueRow from './valueRow';
 
 
 const BASE_URL = 'https://api.frankfurter.app/latest?from=USD'
@@ -26,9 +27,11 @@ export default function CurrencyRow() {
       }, [fromCurrency])
 
       const storedCurrency = reactLocalStorage.get('iniCurrency');
-  
+ 
     return (
       <div className="row-style">
+        <ValueRow
+        />
         <APItest 
         currencyOptions={currencyOptions}
         open={open}
@@ -38,7 +41,7 @@ export default function CurrencyRow() {
         placeholder = {'Enter Search...'}
         storedCurrency={storedCurrency}
         />
-        <p>selected option: {fromCurrency}</p>
+        <p> </p>
       </div>
     );
   }

@@ -1,7 +1,16 @@
-export default function ValueRow() {
+
+
+
+export default function ValueRow(props) {
+
+    const {
+        amount,
+        onChangeAmount
+    } = props
+
     return (
         <div className='row-style'>
-            <input type = "number" defaultValue='5'/>
+            <input type = "number" value={amount} onChange={onChangeAmount}/>
         </div>
     )
 }

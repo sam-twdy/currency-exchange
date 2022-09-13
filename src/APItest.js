@@ -64,18 +64,16 @@ export default function APItest(props) {
     setInputValue('');
   };
 
-  const catMenu = useRef(null)
-
   const closeOpenMenus = (e)=>{
-    if(catMenu.current && open && !catMenu.current.contains(e.target)){
+    if(inputRef.current && open && !inputRef.current.contains(e.target)){
       setOpen(false);
       setInputValue(storedCurrency);
     }
 }
   
   return (
-    <div className="dropdown-container" ref={catMenu}>
-        <div className="input-container" onClick={onInputClick}>
+    <div className="dropdown-container">
+        <div className="input-container">
           <input
             ref={inputRef}
             type="text"
@@ -83,6 +81,7 @@ export default function APItest(props) {
             onChange={onInputChange}
             placeholder={placeholder}
             onFocus={clearInput}
+            onClick={onInputClick}
           />
         </div>
         <div className={`dropdown ${open ? "visible" : ""}`}>
