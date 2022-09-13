@@ -18,7 +18,7 @@ export default function CurrencyExchange() {
     const [amount, setAmount] = useState(5)
     const [exchangeRate, setExchangeRate] = useState([])
 
-    let toAmount = exchangeRate.map(arr => arr * amount)
+    //let toAmount = exchangeRate.map(arr => arr * amount)
 
     useEffect(() => {
         fetch(BASE_URL)
@@ -41,7 +41,7 @@ export default function CurrencyExchange() {
       const currencyExchangeList = {};
 
       toCurrency.forEach((element, index) => {
-        currencyExchangeList[element] = exchangeRate.map(arr => arr * amount)[index];
+        currencyExchangeList[element] = exchangeRate[index];
       });
 
       console.log(currencyExchangeList);
@@ -54,7 +54,8 @@ export default function CurrencyExchange() {
       const storedCurrency = reactLocalStorage.get('iniCurrency');
 
       function handleFromAmountChange(e) {
-        setAmount(e.target.value)
+        if (e.target.value !== undefined && e.target.value > 0) {
+        setAmount(e.target.value)}
       }
 
     return (
@@ -91,7 +92,6 @@ export default function CurrencyExchange() {
             selectedCurrency={fromCurrency}
             toCurrency={toCurrency}
             amount={amount}
-            toAmount={toAmount}
             currencyExchangeList={currencyExchangeList}
             />
           </Col>

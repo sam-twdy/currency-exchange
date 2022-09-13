@@ -4,7 +4,6 @@ export default function ExchangeTable(props) {
 
     const {
         selectedCurrency,
-        toCurrency,
         amount,
         currencyExchangeList
       } = props
@@ -22,7 +21,8 @@ export default function ExchangeTable(props) {
             {Object.keys(currencyExchangeList).map((key, index) =>
               <tr>
                 <td className="pl-4 py-2">{key}</td>
-                <td className="pl-4 py-2">{currencyExchangeList[key]}</td>
+                <td className="pl-4 py-2">{(currencyExchangeList[key] * amount).toFixed(2)}</td>
+                <td className="pl-4 py-2">{currencyExchangeList[key].toFixed(2)}</td>
               </tr>
             )}
           </tbody>
