@@ -9,7 +9,7 @@ export default function APItest(props) {
     open,
     selectedCurrency,
     placeholder,
-    storedCurrency
+    storedCurrency,
   } = props
 
   const [inputValue, setInputValue] = useState(selectedCurrency);
@@ -27,9 +27,9 @@ export default function APItest(props) {
       } else {
         if (selectedCurrency) {
           setInputValue(currencyOptions.find((o) => o === selectedCurrency));
-        } else {
+        } /*else {
           setInputValue("");
-        }
+        }*/
       }
     }
   }, [open, currencyOptions, selectedCurrency, inputValue, onChange]);
@@ -49,10 +49,11 @@ export default function APItest(props) {
   const onInputClick = () => {
     setOpen((prevValue) => !prevValue);
     if (open === true) inputRef.current.blur();
-    if (open === true) setInputValue(storedCurrency)
+    if (open === true) setInputValue(storedCurrency);
   };
 
   const inputRef = useRef();
+  const divRef = useRef();
 
   const onOptionSelected = (option) => {
     onChange !== undefined && onChange(option);
@@ -65,26 +66,33 @@ export default function APItest(props) {
   };
 
   const closeOpenMenus = (e)=>{
-    if(inputRef.current && open && !inputRef.current.contains(e.target)){
+    if(divRef.current && open && !divRef.current.contains(e.target)){
       setOpen(false);
       setInputValue(storedCurrency);
     }
   };
+
+  /*const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      console.log('do validate')
+    }
+  }*/
   
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" ref={divRef}>
         <div className="input-container">
           <input
             ref={inputRef}
             type="text"
             value={inputValue}
             onChange={onInputChange}
+            //onKeyPress={handleKeyPress}
             placeholder={placeholder}
             onFocus={clearInput}
             onClick={onInputClick}
           />
         </div>
-        <div className={`dropdown ${open ? "visible" : ""}`} ref={inputRef}>
+        <div className={`dropdown ${open ? "visible" : ""}`}>
             {currencyOptions
             .filter((item) => {
               const searchTerm = (inputValue || '').toUpperCase();

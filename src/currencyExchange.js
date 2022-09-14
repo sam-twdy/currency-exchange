@@ -11,24 +11,17 @@ export default function CurrencyExchange() {
 
     const [currencyOptions, setCurrencyOptions] = useState([])
     const [open, setOpen] = useState(false);
-    const [toCurrency, setToCurrency] = useState(['USD'])
-    const [fromCurrency, setFromCurrency] = useState('')
+    const [toCurrency, setToCurrency] = useState([])
+    const [fromCurrency, setFromCurrency] = useState(['USD'])
     const [amount, setAmount] = useState(5)
     const [exchangeRate, setExchangeRate] = useState([])
 
-  const BASE_URL = (`https://api.frankfurter.app/latest?from=${toCurrency}`)
-
-    //let toAmount = exchangeRate.map(arr => arr * amount)
+  //const BASE_URL = (`https://api.frankfurter.app/latest?from=${fromCurrency}`)
 
     useEffect(() => {
-        fetch(BASE_URL)
+        fetch(`https://api.frankfurter.app/latest?from=${fromCurrency}`)
           .then(res => res.json())
           .then(data => {
-            /*const currency = {
-              name: Object.keys(data.rates),
-              value: Object.values(data.rates)
-            }
-            */
             const currency = Object.keys(data.rates)
             const rates = Object.values(data.rates)
             setCurrencyOptions([data.base, ...Object.keys(data.rates)])
@@ -36,7 +29,7 @@ export default function CurrencyExchange() {
             setToCurrency(currency)
             setExchangeRate(rates)
           })
-      }, [])
+      }, [fromCurrency])
 
       const currencyExchangeList = {};
 
@@ -51,11 +44,26 @@ export default function CurrencyExchange() {
       const storedCurrency = reactLocalStorage.get('iniCurrency');
 
       function handleFromAmountChange(e) {
-        if (e.target.value === undefined || e.target.value < 0.01) {
+        if (e === undefined || e < 0.01) {
         setAmount(1)}
         else {
-        setAmount(e.target.value)
+        setAmount(e)
         }
+      }
+
+      function refreshList(item) {
+        if (item.length > 2) {
+        setFromCurrency(item)
+        fetch(`https://api.frankfurter.app/latest?from=${item}`)
+        .then(res => res.json())
+        .then(data => {
+          const currency = Object.keys(data.rates)
+          const rates = Object.values(data.rates)
+          setCurrencyOptions([data.base, ...Object.keys(data.rates)])
+          //setFromCurrency(data.base)
+          setToCurrency(currency)
+          setExchangeRate(rates)
+        })}
       }
 
     return (
@@ -76,9 +84,11 @@ export default function CurrencyExchange() {
               open={open}
               setOpen={setOpen}
               selectedCurrency={fromCurrency}
-              onChange={(item) => setFromCurrency(item)}
+              //onChange={(item) => setFromCurrency(item)}
+              onChange={(item) => refreshList(item)}
               placeholder = {'Enter Search...'}
               storedCurrency={storedCurrency}
+              refreshList={refreshList}
               />
               <p> </p>
             </div>
