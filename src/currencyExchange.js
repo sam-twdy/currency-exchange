@@ -96,7 +96,7 @@ export default function CurrencyExchange() {
             <div className='linebreak'/>
           </Col>
           <Col lg={8} className='exchange-table'>
-            <div className=''>Currency Exchange Rates</div>
+            <div className='exchange-title'>Currency Exchange Rates</div>
             <ExchangeTable
             currencyOptions={currencyOptions}
             selectedCurrency={fromCurrency}
