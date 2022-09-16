@@ -69,8 +69,9 @@ export default function CurrencyExchange() {
     return (
         <div className='configure-wrapper'>
         <div className='linebreak'/>
+        <h1 className='title d-none d-lg-block'>Currency Exchange</h1>
         <Row className='row header-gap'>
-          <Col lg={3} className='config'>
+          <Col xs={12} lg={6} className='config'>
             <div className='linebreak'/>
             <div className='config-title'>Currency Converter</div>
             <div className='display-container'>
@@ -95,7 +96,8 @@ export default function CurrencyExchange() {
             </div>
             <div className='linebreak'/>
           </Col>
-          <Col lg={8} className='exchange-table'>
+          <Col xs={12} lg={6} className='exchange-table'>
+            <div className='linebreak'/>
             <div className='exchange-title'>Currency Exchange Rates</div>
             <ExchangeTable
             currencyOptions={currencyOptions}

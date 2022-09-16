@@ -1,5 +1,3 @@
-
-
 export default function ExchangeTable(props) {
 
     const {
@@ -10,6 +8,7 @@ export default function ExchangeTable(props) {
 
     return (
         <table className="table table-sm bg-light mt-4">
+          
           <thead>
             <tr className="exchangeRows">
             <th scope="col" className="iniColumn pr-4 py-2">{selectedCurrency}</th>
