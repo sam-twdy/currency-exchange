@@ -221,7 +221,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .navbar-brand {
-  /*margin-right: 50px;*/
   font-weight: 400;
 }
 
@@ -236,4 +235,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .table {
   margin-bottom: 0;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    box-shadow: none;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: transparent !important;
+}
+
+a.header-title:hover {
+  text-decoration: none;
+  font-weight: 600;
 }
