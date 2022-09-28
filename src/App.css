@@ -251,3 +251,41 @@ a.header-title:hover {
   text-decoration: none;
   font-weight: 600;
 }
+
+.table-link {
+  color: rgb(26, 126, 207);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row > .col {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+.form-styles {
+  scale: 90%;
+}
+
+.chart-styles {
+  scale: 90%;
+}
