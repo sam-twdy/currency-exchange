@@ -266,11 +266,13 @@ a.header-title:hover {
   vertical-align: middle;
 }
 
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -5px;
-  margin-left: -5px;
+@media screen and (min-width: 768px) {
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+  }
 }
 
 .form-row > .col {
@@ -287,5 +289,5 @@ label {
 }
 
 .chart-styles {
-  scale: 90%;
+  scale: 85%;
 }

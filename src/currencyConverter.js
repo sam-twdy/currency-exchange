@@ -1,5 +1,5 @@
 // CurrencyConverter.js
-import React from 'react';
+import React from "react";
 import Chart from 'chart.js';
 import currencies from './utils/currencies';
 import { checkStatus, json } from './utils/fetchUtils';
@@ -143,17 +143,19 @@ class CurrencyConverter extends React.Component {
   }
 
   render() {
+    
     const { rate, baseAcronym, baseValue, quoteAcronym, quoteValue, loading } = this.state;
 
     const currencyOptions = Object.keys(currencies).map(currencyAcronym => <option key={currencyAcronym} value={currencyAcronym}>{currencyAcronym}</option>);
 
     return (
       <React.Fragment>
+        <div className='linebreak'/>
         <div className="text-center p-3">
-          <h2 className="mb-2">Currency Converter</h2>
-          <h4>1 {baseAcronym} to 1 {quoteAcronym} = {rate.toFixed(4)} {currencies[quoteAcronym].name}</h4>
+          <h2 className="mb-2 d-none d-lg-block">Currency Converter</h2>
+          <h4 className="d-none d-lg-block">1 {baseAcronym} to 1 {quoteAcronym} = {rate.toFixed(4)} {currencies[quoteAcronym].name}</h4>
         </div>
-        <form className="form-styles form-row p-3 mb-4 bg-light justify-content-center">
+        <form className="form-styles form-row p-3 mb-4 bg-light justify-content-center" media="screen and (min-width: 768px)">
           <div className="form-group col-md-5 mb-0">
             <select value={baseAcronym} onChange={this.changeBaseAcronym} className="form-control form-control-lg mb-2" disabled={loading}>
               {currencyOptions}
@@ -176,6 +178,8 @@ class CurrencyConverter extends React.Component {
             <small className="text-secondary">{currencies[quoteAcronym].name}</small>
           </div>
         </form>
+        {/* media responsive form */}
+        
         <canvas class='chart-styles' ref={this.chartRef} />
       </React.Fragment>
     )
