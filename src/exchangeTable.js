@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function ExchangeTable(props) {
 
     const {
@@ -21,7 +22,7 @@ export default function ExchangeTable(props) {
               <tr className="exchangeRows">
                 <td className="iniColumn pl-4 py-2">{key}</td>
                 <td className="exchangeColumns pl-4 py-2">{(currencyExchangeList[key] * amount).toFixed(6)}</td> 
-                <td className="exchangeColumns pl-4 py-2">{currencyExchangeList[key].toFixed(6)}&nbsp;</td>
+                <td className="exchangeColumns pl-4 py-2"><Link class='table-link' to={`/currencyconverter?base=${selectedCurrency}&quote=${key}`}>{currencyExchangeList[key].toFixed(6)}&nbsp;</Link></td>
               </tr>
             )}
           </tbody>
