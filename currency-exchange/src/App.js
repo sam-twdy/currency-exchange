@@ -9,7 +9,7 @@ import CurrencyConverter from './currencyConverter';
 function App() {
   return (
       
-    <Router basename="/currency-exchange">
+    <Router>
         <Navigation />
             <Switch>
               <Route path="/" exact component={CurrencyExchange} />
