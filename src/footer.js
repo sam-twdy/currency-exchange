@@ -14,7 +14,7 @@ export default function Footer() {
                 <div>2022 © Samuel Tweedy</div>
             </Col>
             <Col className="footer-right">
-                <div><a href=''>GitHub</a></div>
+                <div><a href='https://github.com/sam-twdy'>GitHub</a></div>
             </Col>
             <Col className="footer-divide d-none d-lg-block">
                 <div> | </div>
@@ -23,7 +23,7 @@ export default function Footer() {
                 <div> | </div>
             </Col>
             <Col className="footer-right2">
-                <div><a href=''>LinkedIn</a></div>
+                <div><a href='https://www.linkedin.com/in/samuel-tweedy-6a5a0b227/'>LinkedIn</a></div>
             </Col>
         </Row>
     </footer>

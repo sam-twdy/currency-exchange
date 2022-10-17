@@ -9,11 +9,9 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="./" className="navbar-brand">Home</Nav.Link>
+            <Nav.Link href="./" className="navbar-brand">Currency Exchange</Nav.Link>
             <span className="navbar-brand d-none d-md-block">|</span>
-            <Nav.Link href="" className="navbar-brand">Portfolio</Nav.Link>
-            <span className="navbar-brand d-none d-md-block">|</span>
-            <Nav.Link href="" className="navbar-brand">Contact</Nav.Link>
+            <Nav.Link href="./currencyconverter?base=USD&quote=AUD" className="navbar-brand">Currency Converter</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>
